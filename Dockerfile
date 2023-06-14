@@ -11,8 +11,8 @@ COPY . /app
 # 获取依赖并构建应用
 RUN dart pub get
 
-ENV PORT 80
-EXPOSE 80
+ENV PORT 8080
+EXPOSE 8080
 
 # 运行应用
 CMD ["dart", "main.dart"]

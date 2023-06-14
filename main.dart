@@ -12,7 +12,7 @@ void main() async {
   app.get('/google-chat/api/messages', googleChatHandler);
 
   // 创建服务器并启动
-  final server = await io.serve(app, 'localhost', 80);
+  final server = await io.serve(app, 'localhost', 8080);
   print('Server running on ${server.address}:${server.port}');
 }
 
