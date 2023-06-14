@@ -1,0 +1,24 @@
+steps:
+  # Docker Build
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: /bin/sh
+    args:
+      - '-c'
+      - |
+        echo "$_GOOGLE_SERVICE_FILE" > google-service.json && \
+        docker build -t $_ARTIFACT_REPOSITORY/${PROJECT_ID}/$_SHUTARA_REPO_NAME/shutara-slack:$COMMIT_SHA .
+
+  # Docker Push
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push',
+           '$_ARTIFACT_REPOSITORY/${PROJECT_ID}/$_SHUTARA_REPO_NAME/shutara-slack:$COMMIT_SHA']
+
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args: ['run', 'deploy', '$_CLOUD_RUN_NAME', '--image', '$_ARTIFACT_REPOSITORY/${PROJECT_ID}/$_SHUTARA_REPO_NAME/shutara-slack:$COMMIT_SHA', '--region', '$_CLOUD_RUN_REGION']
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+images:
+  - $_ARTIFACT_REPOSITORY/${PROJECT_ID}/$_SHUTARA_REPO_NAME/shutara-slack:$COMMIT_SHA
