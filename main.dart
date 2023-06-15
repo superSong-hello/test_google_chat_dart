@@ -9,7 +9,7 @@ void main() async {
   // 定义路由和对应的处理函数
   app.get('/hello', helloHandler);
 
-  app.get('/google-chat/api/messages', googleChatHandler);
+  app.post('/google-chat/messages', googleChatHandler);
 
   // 创建服务器并启动
   final server = await io.serve(app, 'localhost', 8081);
