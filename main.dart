@@ -9,6 +9,8 @@ void main() async {
   // 定义路由和对应的处理函数
   app.get('/hello', helloHandler);
 
+  app.get('/text', textHandler);
+
   app.post('/google-chat/messages', googleChatHandler);
 
   // 创建服务器并启动
@@ -18,16 +20,20 @@ void main() async {
 
 // 定义处理函数
 Response helloHandler(Request request) {
-  return Response.ok(jsonEncode(cardJson1), headers: {
-    'content-type': 'application/json'
-  });
+  return Response.ok(jsonEncode(cardJson1), headers: headers);
 }
 
 Response googleChatHandler(Request request) {
-  return Response.ok(jsonEncode(cardJson), headers: {
-    'content-type': 'application/json'
-  });
+  return Response.ok(jsonEncode(cardJson), headers: headers);
 }
+
+Response textHandler(Request req) {
+  return Response.ok(jsonEncode({'text': 'hello banto'}), headers: headers);
+}
+
+Map<String, Object> headers = {
+  'content-type': 'application/json'
+};
 
 Map<String, dynamic> cardJson = {
   "cardsV2": [
