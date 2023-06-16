@@ -18,7 +18,9 @@ void main() async {
 
 // 定义处理函数
 Response helloHandler(Request request) {
-  return Response.ok('Hello, Dart Backend!');
+  return Response.ok(jsonEncode(cardJson1), headers: {
+    'content-type': 'application/json'
+  });
 }
 
 Response googleChatHandler(Request request) {
@@ -42,12 +44,45 @@ Map<String, dynamic> cardJson = {
         },
         "sections": [
           {
-            "textParagraph": {
-              "text": "Your avatar picture: "
-            }
-          },
+            "widgets": [
+              {
+                "textParagraph": {
+                  "text": "Your avatar picture: "
+                }
+              },
+              {
+                "image": "https://img2.baidu.com/it/u=567357414,4240886412&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1686848400&t=2c723c1374679205d9d53046ee8ed77b"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+};
+
+Map<String, dynamic> cardJson1 = {
+  "cardsV2": [
+    {
+      "cardId": "avatarCard",
+      "card": {
+        "name": "Avatar Card",
+        "header": {
+          "title": "Hello",
+          "subtitle": "Software Engineer",
+          "imageUrl": "https://developers.google.com/chat/images/quickstart-app-avatar.png",
+          "imageType": "CIRCLE",
+          "imageAltText": "Avatar for Sasha"
+        },
+        "sections": [
           {
-            "image": "https://img2.baidu.com/it/u=567357414,4240886412&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1686848400&t=2c723c1374679205d9d53046ee8ed77b"
+            "widgets": [
+              {
+                "textParagraph": {
+                  "text": "Your avatar picture: "
+                }
+              }
+            ]
           }
         ]
       }
