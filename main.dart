@@ -42,7 +42,7 @@ Map<String, dynamic> cardJson = {
       "card": {
         "name": "Avatar Card",
         "header": {
-          "title": "Hello",
+          "title": "Hello !",
           "subtitle": "Software Engineer",
           "imageUrl": "https://developers.google.com/chat/images/quickstart-app-avatar.png",
           "imageType": "CIRCLE",
@@ -57,7 +57,9 @@ Map<String, dynamic> cardJson = {
                 }
               },
               {
-                "image": "https://img2.baidu.com/it/u=567357414,4240886412&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1686848400&t=2c723c1374679205d9d53046ee8ed77b"
+                "image": {
+                  "imageUrl": "https://img2.baidu.com/it/u=2048195462,703560066&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1687021200&t=c5a7030b97ed8c35ec8f9340f93e65d3"
+                }
               }
             ]
           }
