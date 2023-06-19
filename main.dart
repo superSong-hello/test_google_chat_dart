@@ -13,6 +13,8 @@ void main() async {
 
   app.post('/google-chat/messages', googleChatHandler);
 
+  app.post('/buttons', buttonHandler);
+
   // 创建服务器并启动
   final server = await io.serve(app, 'localhost', 8081);
   print('Server running on ${server.address}:${server.port}');
@@ -25,6 +27,52 @@ Response helloHandler(Request request) {
 
 Response googleChatHandler(Request request) {
   return Response.ok(jsonEncode(cardJson), headers: headers);
+}
+
+Response buttonHandler(Request request) {
+  return Response.ok(jsonEncode({
+    "cardsV2": [
+      {
+        "cardId": "exampleCard",
+        "card": {
+          "sections": [
+            {
+              "widgets": [
+                {
+                  "buttonList": {
+                    "buttons": [
+                      {
+                        "text": "Open a hyperlink",
+                        "onClick": {
+                          "openLink": {
+                            "url": "https://developers.google.com/chat",
+                          }
+                        }
+                      },
+                      {
+                        "text": "Run a custom function",
+                        "onClick": {
+                          "action": {
+                            "function": "goToView",
+                            "parameters": [
+                              {
+                                "key": "viewType",
+                                "value": "BIRD EYE VIEW",
+                              }
+                            ],
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }), headers: headers);
 }
 
 Response textHandler(Request req) {
