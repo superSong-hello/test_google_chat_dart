@@ -58,7 +58,7 @@ Map<String, dynamic> cardJson = {
               },
               {
                 "image": {
-                  "imageUrl": "https://img2.baidu.com/it/u=2048195462,703560066&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1687021200&t=c5a7030b97ed8c35ec8f9340f93e65d3"
+                  "imageUrl": "https://lh3.googleusercontent.com/a/AAcHTtcPpZJO414X0zTX0SEr-BHyyRfMO_LPw15H5tO9=s96-c"
                 }
               }
             ]
