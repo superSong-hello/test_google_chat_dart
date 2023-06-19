@@ -132,10 +132,24 @@ Response textHandler(Request req) {
                             }
                           },
                           {
-                            "text": "Edit",
+                            "text": "Open New Card",
                             "onClick": {
                               "action": {
                                 "function": "goToView",
+                                "parameters": [
+                                  {
+                                    "key": "viewType",
+                                    "value": "EDIT",
+                                  }
+                                ],
+                              }
+                            }
+                          },
+                          {
+                            "text": "Open New Card Return {}",
+                            "onClick": {
+                              "action": {
+                                "function": "goToView1",
                                 "parameters": [
                                   {
                                     "key": "viewType",
@@ -156,6 +170,17 @@ Response textHandler(Request req) {
         ],
       }
       ), headers: headers);
+}
+
+void goToView(Map<String, dynamic> parameters) {
+  final newJsonResponse = jsonEncode(buttonJson);
+  print(newJsonResponse);
+}
+
+goToView1(Map<String, dynamic> parameters) {
+  final newJsonResponse = jsonEncode(buttonJson);
+  print(newJsonResponse);
+  return newJsonResponse;
 }
 
 Map<String, Object> headers = {
@@ -215,6 +240,31 @@ Map<String, dynamic> cardJson1 = {
               {
                 "textParagraph": {
                   "text": "Your avatar picture: "
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+};
+
+Map<String, dynamic> buttonJson = {
+  "cardsV2": [
+    {
+      "cardId": "newCard",
+      "card": {
+        "header": {
+          "title": "New Card",
+          "subtitle": "This is a new card"
+        },
+        "sections": [
+          {
+            "widgets": [
+              {
+                "textParagraph": {
+                  "text": "This is the content of the new card"
                 }
               }
             ]
