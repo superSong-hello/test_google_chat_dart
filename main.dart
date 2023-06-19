@@ -180,7 +180,7 @@ void goToView(Map<String, dynamic> parameters) {
 goToView1(Map<String, dynamic> parameters) {
   final newJsonResponse = jsonEncode(buttonJson);
   print(newJsonResponse);
-  return newJsonResponse;
+  return Response.ok(newJsonResponse, headers: headers);
 }
 
 Map<String, Object> headers = {
