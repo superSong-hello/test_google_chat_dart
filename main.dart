@@ -9,7 +9,7 @@ void main() async {
   // 定义路由和对应的处理函数
   app.get('/hello', helloHandler);
 
-  app.get('/text', textHandler);
+  app.post('/example', textHandler);
 
   app.post('/google-chat/messages', googleChatHandler);
 
@@ -28,7 +28,86 @@ Response googleChatHandler(Request request) {
 }
 
 Response textHandler(Request req) {
-  return Response.ok(jsonEncode({'text': 'hello banto'}), headers: headers);
+  return Response.ok(jsonEncode(
+      {
+        "cardsV2": [
+          {
+            "cardId": "unique-card-id",
+            "card": {
+              "header": {
+                "title": "Sasha",
+                "subtitle": "Software Engineer",
+                "imageUrl":
+                "https://developers.google.com/chat/images/quickstart-app-avatar.png",
+                "imageType": "CIRCLE",
+                "imageAltText": "Avatar for Sasha",
+              },
+              "sections": [
+                {
+                  "header": "Contact Info",
+                  "collapsible": true,
+                  "uncollapsibleWidgetsCount": 1,
+                  "widgets": [
+                    {
+                      "decoratedText": {
+                        "startIcon": {
+                          "knownIcon": "EMAIL",
+                        },
+                        "text": "sasha@example.com",
+                      }
+                    },
+                    {
+                      "decoratedText": {
+                        "startIcon": {
+                          "knownIcon": "PERSON",
+                        },
+                        "text": "<font color=\"#80e27e\">Online</font>",
+                      },
+                    },
+                    {
+                      "decoratedText": {
+                        "startIcon": {
+                          "knownIcon": "PHONE",
+                        },
+                        "text": "+1 (555) 555-1234",
+                      }
+                    },
+                    {
+                      "buttonList": {
+                        "buttons": [
+                          {
+                            "text": "Share",
+                            "onClick": {
+                              "openLink": {
+                                "url": "https://example.com/share",
+                              }
+                            }
+                          },
+                          {
+                            "text": "Edit",
+                            "onClick": {
+                              "action": {
+                                "function": "goToView",
+                                "parameters": [
+                                  {
+                                    "key": "viewType",
+                                    "value": "EDIT",
+                                  }
+                                ],
+                              }
+                            }
+                          },
+                        ],
+                      }
+                    },
+                  ],
+                },
+              ],
+            },
+          }
+        ],
+      }
+      ), headers: headers);
 }
 
 Map<String, Object> headers = {
@@ -42,7 +121,7 @@ Map<String, dynamic> cardJson = {
       "card": {
         "name": "Avatar Card",
         "header": {
-          "title": "Hello !",
+          "title": "Hello",
           "subtitle": "Software Engineer",
           "imageUrl": "https://developers.google.com/chat/images/quickstart-app-avatar.png",
           "imageType": "CIRCLE",
