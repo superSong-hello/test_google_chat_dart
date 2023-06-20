@@ -53,7 +53,7 @@ Response buttonHandler(Request request) {
                         "text": "Run a custom function",
                         "onClick": {
                           "action": {
-                            "function": "goToView",
+                            "function": "goToNewView",
                             "parameters": [
                               {
                                 "key": "viewType",
@@ -73,6 +73,12 @@ Response buttonHandler(Request request) {
       }
     ]
   }), headers: headers);
+
+  Response goToNewView(Map<String, dynamic> parameters) {
+    final newJsonResponse = jsonEncode(buttonJson);
+    print(newJsonResponse);
+    return Response.ok(newJsonResponse, headers: headers);
+  }
 }
 
 Response textHandler(Request req) {
