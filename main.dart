@@ -9,7 +9,7 @@ void main() async {
   // 定义路由和对应的处理函数
   app.get('/hello', helloHandler);
 
-  app.post('/example', textHandler);
+  app.get('/example', textHandler);
 
   app.post('/google-chat/messages', googleChatHandler);
 
@@ -31,11 +31,11 @@ Response googleChatHandler(Request request) {
 
 Future<Response> buttonHandler(Request request) async {
 
-  final bodyString = await request.readAsString();
-  final bodyParams = jsonDecode(bodyString);
-  if (bodyParams.type == 'CARD_CLICKED') {
-    return Response.ok(jsonEncode(buttonJson), headers: headers);
-  }
+  // final bodyString = await request.readAsString();
+  // final bodyParams = jsonDecode(bodyString);
+  // if (bodyParams.type == 'CARD_CLICKED') {
+  //   return Response.ok(jsonEncode(buttonJson), headers: headers);
+  // }
 
   return Response.ok(jsonEncode({
     "cardsV2": [
