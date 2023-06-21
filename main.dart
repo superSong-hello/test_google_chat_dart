@@ -29,7 +29,14 @@ Response googleChatHandler(Request request) {
   return Response.ok(jsonEncode(cardJson), headers: headers);
 }
 
-Response buttonHandler(Request request) {
+Future<Response> buttonHandler(Request request) async {
+
+  final bodyString = await request.readAsString();
+  final bodyParams = jsonDecode(bodyString);
+  if (bodyParams.type == 'CARD_CLICKED') {
+    return Response.ok(jsonEncode(buttonJson), headers: headers);
+  }
+
   return Response.ok(jsonEncode({
     "cardsV2": [
       {
