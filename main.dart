@@ -31,11 +31,14 @@ Response googleChatHandler(Request request) {
 
 Future<Response> buttonHandler(Request request) async {
 
-  // final bodyString = await request.readAsString();
-  // final bodyParams = jsonDecode(bodyString);
-  // if (bodyParams.type == 'CARD_CLICKED') {
-  //   return Response.ok(jsonEncode(buttonJson), headers: headers);
-  // }
+  final bodyString = await request.readAsString();
+  if (bodyString.isNotEmpty) {
+    final bodyParams = jsonDecode(bodyString) as Map<String, dynamic>;
+    print(bodyParams);
+    if (bodyParams['type'] == 'CARD_CLICKED') {
+      return Response.ok(jsonEncode(cardJson), headers: headers);
+    }
+  }
 
   return Response.ok(jsonEncode({
     "cardsV2": [
@@ -57,7 +60,7 @@ Future<Response> buttonHandler(Request request) async {
                         }
                       },
                       {
-                        "text": "Run a custom function",
+                        "text": "Open User Info",
                         "onClick": {
                           "action": {
                             "function": "goToNewView",
@@ -80,12 +83,6 @@ Future<Response> buttonHandler(Request request) async {
       }
     ]
   }), headers: headers);
-
-  Response goToNewView(Map<String, dynamic> parameters) {
-    final newJsonResponse = jsonEncode(buttonJson);
-    print(newJsonResponse);
-    return Response.ok(newJsonResponse, headers: headers);
-  }
 }
 
 Response textHandler(Request req) {
@@ -185,17 +182,6 @@ Response textHandler(Request req) {
       ), headers: headers);
 }
 
-void goToView(Map<String, dynamic> parameters) {
-  final newJsonResponse = jsonEncode(buttonJson);
-  print(newJsonResponse);
-}
-
-goToView1(Map<String, dynamic> parameters) {
-  final newJsonResponse = jsonEncode(buttonJson);
-  print(newJsonResponse);
-  return Response.ok(newJsonResponse, headers: headers);
-}
-
 Map<String, Object> headers = {
   'content-type': 'application/json'
 };
@@ -209,7 +195,7 @@ Map<String, dynamic> cardJson = {
         "header": {
           "title": "Hello",
           "subtitle": "Software Engineer",
-          "imageUrl": "https://developers.google.com/chat/images/quickstart-app-avatar.png",
+          "imageUrl": "https://lh3.googleusercontent.com/a/AAcHTtcPpZJO414X0zTX0SEr-BHyyRfMO_LPw15H5tO9=k-no",
           "imageType": "CIRCLE",
           "imageAltText": "Avatar for Sasha"
         },
