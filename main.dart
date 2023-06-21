@@ -7,8 +7,6 @@ void main() async {
   final app = Router();
 
   // 定义路由和对应的处理函数
-  app.get('/hello', helloHandler);
-
   app.get('/example', textHandler);
 
   app.post('/google-chat/messages', googleChatHandler);
@@ -21,10 +19,6 @@ void main() async {
 }
 
 // 定义处理函数
-Response helloHandler(Request request) {
-  return Response.ok(jsonEncode(cardJson1), headers: headers);
-}
-
 Response googleChatHandler(Request request) {
   return Response.ok(jsonEncode(cardJson), headers: headers);
 }
